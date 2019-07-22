@@ -16,6 +16,28 @@ function handler(request, response) {
 
       response.end(file);
     });
+  } else if (endpoint === "/node") {
+  } else if (endpoint === "/girls") {
+  } else {
+    const extension = endpoint.split(".")[1];
+
+    const extensionType = {
+      css: "text/css",
+      js: "text/js",
+      ico: "image/x-icon",
+      jpg: "image/jpeg",
+      png: "image/png"
+    };
+
+    fs.readFile(__dirname + "/../public/" + endpoint, function(error, file) {
+      if (error) {
+        console.log(error);
+        return;
+      } else {
+        response.writeHead(200, { "content-type": extensionType[extension] });
+        response.end(file);
+      }
+    });
   }
 }
 
