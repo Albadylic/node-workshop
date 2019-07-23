@@ -1,5 +1,6 @@
 const http = require("http");
 const fs = require("fs");
+const querystring = require("querystring");
 
 function handler(request, response) {
   const endpoint = request.url;
@@ -18,6 +19,18 @@ function handler(request, response) {
     });
   } else if (endpoint === "/node") {
   } else if (endpoint === "/girls") {
+  } else if (endpoint === "/create-post" && method === "POST") {
+    let allTheData = "";
+    request.on("data", function(chunkOfData) {
+      allTheData += chunkOfData;
+    });
+
+    request.on("end", function() {
+      let convertedData = querystring.parse(allTheData);
+      console.log(convertedData);
+      response.writeHead(302, { Location: "/" });
+      response.end();
+    });
   } else {
     const extension = endpoint.split(".")[1];
 
