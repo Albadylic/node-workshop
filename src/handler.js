@@ -1,4 +1,3 @@
-const http = require("http");
 const fs = require("fs");
 const querystring = require("querystring");
 
@@ -54,8 +53,4 @@ function handler(request, response) {
   }
 }
 
-const server = http.createServer(handler);
-
-server.listen(3000, function() {
-  console.log("Server listening on port 3000, ready to accept requests ;)");
-});
+module.exports = handler;
